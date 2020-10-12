@@ -43,5 +43,10 @@ Udemy Vue3 course - Section 14 [Animation and CSS Transitions]
 
   must use done() to notify Vue explicitly when finished
 
-  GOTCHA: animations can run at same time (opacity in and opacity out - you will get flickering)
+  GOTCHA: animations can run at same time (e.g. opacity in and opacity out - you will get flickering)
   SOLUTION: @enter-cancelled | @leave-cancelled
+
+can disable CSS Transitions with :css="false"
+- tells Vue not to search for css classes and don't attempt to read durations
+- skips CSS analysis (seeking classes, etc.)
+- improves performance (if you're not using CSS code for transition)
