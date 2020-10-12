@@ -4,7 +4,15 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition name="para">
+    <transition 
+      name="para" 
+      @before-enter="beforeEnter" 
+      @enter="enter" 
+      @after-enter="afterEnter" 
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+    >
       <p v-if="paraIsVisible">This is only sometimes visible</p>
     </transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
@@ -35,6 +43,31 @@ export default {
     }
   },
   methods: {
+    beforeEnter(el) {
+      console.log('beforeEnter')
+      console.log('element: ', el)
+    },
+    enter(el) {
+      console.log('enter')
+      console.log('element: ', el)
+    },
+    leave(el) {
+      console.log('leave')
+      console.log('element: ', el)
+    },
+    // after animation is done
+    afterEnter(el) {
+      console.log('afterEnter')
+      console.log('element: ', el)
+    },
+    afterLeave(el) {
+      console.log('afterLeave')
+      console.log('element: ', el)
+    },
+    beforeLeave(el) {
+      console.log('beforeLeave')
+      console.log('element: ', el)
+    },
     animateBlock() {
       this.animatedBlock = true
     },
@@ -114,7 +147,7 @@ button:active {
 }
 
 .para-enter-active {
-  transition: slide-scale 0.3s ease-out;
+  transition: slide-scale 2s ease-out;
 }
 
 .para-enter-to {

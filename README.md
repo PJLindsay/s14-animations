@@ -35,3 +35,8 @@ Udemy Vue3 course - Section 14 [Animation and CSS Transitions]
 - transition typically needs only 1 child element, exception:
   - swapping in/out components (transition) - e.g. v-if with v-else
   - use transition 'mode' to control which button can be animated first (don't see 2 buttons at same time)
+
+- use Transition events @before-enter | @enter | @after-enter | @before-leave | @leave | @after-leave
+  - c/w parameter for element
+  - allows use of JS in various phases of animation
+  - can control entire animation with JS using Transition events
