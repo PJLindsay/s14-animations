@@ -4,14 +4,16 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition 
-      name="para" 
-      @before-enter="beforeEnter" 
-      @enter="enter" 
-      @after-enter="afterEnter" 
+    <transition
+      name="para"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
       @before-leave="beforeLeave"
       @leave="leave"
       @after-leave="afterLeave"
+      @enter-cancelled="enterCancelled"
+      @leave-cancelled="leaveCancelled"
     >
       <p v-if="paraIsVisible">This is only sometimes visible</p>
     </transition>
@@ -40,20 +42,50 @@ export default {
       dialogIsVisible: false,
       paraIsVisible: false,
       usersAreVisible: false,
+      enterInterval: null,
+      leaveInterval: null
     }
   },
   methods: {
     beforeEnter(el) {
       console.log('beforeEnter')
       console.log('element: ', el)
+      el.style.opacity = 0
     },
-    enter(el) {
+    enter(el, done) {
       console.log('enter')
       console.log('element: ', el)
+      let round = 1
+      this.enterInterval = setInterval(() => {
+        el.style.opacity = round * 0.01
+        round++
+        if (round > 100) {
+          clearInterval(this.enterInterval)
+          done()
+        }
+      }, 20)
     },
-    leave(el) {
+    leave(el,done) {
       console.log('leave')
       console.log('element: ', el)
+
+      let round = 1
+      this.leaveInterval = setInterval(() => {
+        el.style.opacity = 1 - round * 0.01
+        round++
+        if (round > 100) {
+          clearInterval(this.leaveInterva)
+          done()
+        }
+      }, 20)
+    },
+    enterCancelled(el) {
+      console.log('enterCancelled: ', el)
+      clearInterval(this.enterInterval)
+    },
+    leaveCancelled(el) {
+      console.log('leaveCancelled: ', el)
+      clearInterval(this.leaveInterval)
     },
     // after animation is done
     afterEnter(el) {
@@ -137,39 +169,6 @@ button:active {
 .animate {
   /* transform: translateX(-150px); */
   animation: slide-fade 0.3s ease-out forwards;
-}
-
-/* v-enter... when element appears in DOM for first time */
-.para-enter-from {
-  /* starting state goes here */
-  /* opacity: 0;
-  transform: translateY(-30px); */
-}
-
-.para-enter-active {
-  transition: slide-scale 2s ease-out;
-}
-
-.para-enter-to {
-  /* opacity: 1;
-  transform: translateY(0); */
-};
-
-/* v-leave... when element is in DOM */
-.para-leave-from {
-  /* starting state */
-  /* opacity: 1;
-  transform: translateY(0); */
-}
-
-.para-leave-active {
-  /* transition: all 0.3s ease-in; */
-  animation: slide-scale 0.3s ease-out;
-}
-
-.para-leave-to {
-  /* opacity: 0;
-  transform: translateY(30px); */
 }
 
 .fade-button-enter-from,
