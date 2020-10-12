@@ -73,3 +73,13 @@ move: (e.g. user-list-move) Vue will use transform under hood for moving element
 
 GOTCHA: snapping animation on remove (e.g. remove item from middle of list)
 FIX: on 'leave-active' class, use 'position: absolute'
+
+### Animating Route Changes
+
+GOTCHA: Older versions of Vue: router-view can no longer be used directly inside transition (use slot props instead)
+FIX: use transition element inside router-view and :is="slotProps.Component"
+
+GOTCHA: when you first load - first route is empty route so you get 'unwanted' animation on first load
+FIX: call router.isReady() in main.js with then block and mount app only when router is fully setup and aware of page to be loaded
+
+when animating route changes you must not have multiple root elements!
