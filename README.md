@@ -23,3 +23,11 @@ Udemy Vue3 course - Section 14 [Animation and CSS Transitions]
     - allows multiple different transitions/component usage in same component
   - for completely custom class names (e.g. using 3rd party animation library):
     - use enter-to-class="" attributes on transition
+
+- GOTCHA: because in Vue 3 we can have more than one root element:
+    - fall through will cause animation to not work (transition wants just one child element)
+    - backdrop and dialog in BaseModal.vue (comment out backdrop to see)
+    - SOLUTION: move transition wrapper from App.vue to BaseModal.vue
+
+- GOTCHA: transition is not part of template so v-if won't get animation/transition
+  - SOLUTION: use :open property (instead of v-if) to control open/close
