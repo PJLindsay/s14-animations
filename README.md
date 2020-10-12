@@ -36,17 +36,35 @@ Udemy Vue3 course - Section 14 [Animation and CSS Transitions]
   - swapping in/out components (transition) - e.g. v-if with v-else
   - use transition 'mode' to control which button can be animated first (don't see 2 buttons at same time)
 
-- use Transition hooks @before-enter | @enter | @after-enter | @before-leave | @leave | @after-leave
-  - c/w parameter for element
-  - allows use of JS in various phases of animation
-  - can control entire animation w/ JS using Transition events (e.g. 3rd party JS animation libraries: GreenSock)
+### Using Transition Events
+
+-  @before-enter | @enter | @after-enter | @before-leave | @leave | @after-leave
+- c/w parameter for element
+- allows use of JS in various phases of animation
+- can control entire animation w/ JS using Transition events (e.g. 3rd party JS animation libraries: GreenSock)
 
   must use done() to notify Vue explicitly when finished
 
   GOTCHA: animations can run at same time (e.g. opacity in and opacity out - you will get flickering)
   SOLUTION: @enter-cancelled | @leave-cancelled
 
-can disable CSS Transitions with :css="false"
+### Disable CSS Transitions
+
+- :css="false"
 - tells Vue not to search for css classes and don't attempt to read durations
 - skips CSS analysis (seeking classes, etc.)
 - improves performance (if you're not using CSS code for transition)
+
+### Animated Lists
+
+transition-group used to work with multiple elements (lists)
+can animate single elements or multiple elements at same time
+
+transition renders no element to DOM
+transition-group does render element to DOM
+
+can use any HTML element as tag (tag="ul)
+use name as prefix for events styling class names
+
+GOTCHA: list jumps when items removed
+FIX: 
