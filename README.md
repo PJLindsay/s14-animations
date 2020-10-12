@@ -31,3 +31,7 @@ Udemy Vue3 course - Section 14 [Animation and CSS Transitions]
 
 - GOTCHA: transition is not part of template so v-if won't get animation/transition
   - SOLUTION: use :open property (instead of v-if) to control open/close
+
+- transition typically needs only 1 child element, exception:
+  - swapping in/out components (transition) - e.g. v-if with v-else
+  - use transition 'mode' to control which button can be animated first (don't see 2 buttons at same time)
