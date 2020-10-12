@@ -4,7 +4,7 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition>
+    <transition name="para">
       <p v-if="paraIsVisible">This is only sometimes visible</p>
     </transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
@@ -94,34 +94,34 @@ button:active {
 }
 
 /* v-enter... when element appears in DOM for first time */
-.v-enter-from {
+.para-enter-from {
   /* starting state goes here */
   /* opacity: 0;
   transform: translateY(-30px); */
 }
 
-.v-enter-active {
+.para-enter-active {
   transition: slide-scale 0.3s ease-out;
 }
 
-.v-enter-to {
+.para-enter-to {
   /* opacity: 1;
   transform: translateY(0); */
 };
 
 /* v-leave... when element is in DOM */
-.v-leave-from {
+.para-leave-from {
   /* starting state */
   /* opacity: 1;
   transform: translateY(0); */
 }
 
-.v-leave-active {
+.para-leave-active {
   /* transition: all 0.3s ease-in; */
   animation: slide-scale 0.3s ease-out;
 }
 
-.v-leave-to {
+.para-leave-to {
   /* opacity: 0;
   transform: translateY(30px); */
 }
