@@ -66,5 +66,10 @@ transition-group does render element to DOM
 can use any HTML element as tag (tag="ul)
 use name as prefix for events styling class names
 
-GOTCHA: list jumps when items removed
-FIX: 
+GOTCHA: list jumps when items added
+FIX: use x-move class to animated elements not being removed
+
+move: (e.g. user-list-move) Vue will use transform under hood for moving elements which are not added or removed
+
+GOTCHA: snapping animation on remove (e.g. remove item from middle of list)
+FIX: on 'leave-active' class, use 'position: absolute'
